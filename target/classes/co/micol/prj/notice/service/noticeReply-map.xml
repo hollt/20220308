@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="co.micol.prj.notice.service.NoticeReplyMapper">
+	<select id="noticeReplySelect" resultType="co.micol.prj.notice.vo.NoticeReplyVO">
+		SELECT * FROM NOTICEREPLY WHERE NOTICE_ID = #{notice_id} 
+		ORDER BY REPLYNO ASC		
+	</select>
+	
+	<insert id="noticeReplyInsert" parameterType="co.micol.prj.notice.vo.NoticeReplyVO">
+		INSERT INTO NOTICEREPLY
+		VALUES(reply_no.nextval,#{notice_id},#{replyId},#{replyContents})
+	</insert>
+	
+	<delete id="noticeReplyDelete" parameterType="co.micol.prj.notice.vo.NoticeReplyVO">
+		DELETE FROM NOTICEREPLY WHERE REPLYNO = #{replyNo}
+	</delete>
+	<select id = "selectReplyNo" resultType="co.micol.prj.notice.vo.NoticeReplyVO">
+		SELECT MAX(REPLYNO) AS REPLYNO FROM NOTICEREPLY
+	</select>
+
+</mapper>
